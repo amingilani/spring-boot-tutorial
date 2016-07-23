@@ -6,6 +6,8 @@ This is the story of how I went from zero to Spring Boot in seven days, and how 
 
 For this project, we'll be creating a Spring app that lets us sign in, and get advice.
 
+## Spring
+
 ## Prerequisites
 
 It is assumed that you:
@@ -21,7 +23,7 @@ It is assumed that you:
     - [Learn X in Y Minutes](https://learnxinyminutes.com/docs/java/)
   2. Learn about Maven
     - [Maven in 5 Minutes](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html)
-    - [Maven Getting Started Guide](https://maven.apache.org/guides/getting-started/index.html)
+    - [Getting Started with Maven](http://spring.io/guides/gs/maven/)
   3. Spring:
     - [Spring Framework Quickstart](https://projects.spring.io/spring-framework/) -- Don't go deep
     - [Spring Boot Quickstart](http://projects.spring.io/spring-boot/)
