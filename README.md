@@ -2,11 +2,17 @@
 
 This is the story of how I went from zero to Spring Boot in seven days, and how you can too. This entire article is based on my experience alone.
 
+## Spring
+
+TODO
+
 ## Goal
 
 For this project, we'll be creating a Spring app that lets us sign in, and get advice.
 
-## Spring
+## Maven
+
+A
 
 ## Prerequisites
 
