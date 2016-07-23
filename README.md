@@ -19,8 +19,8 @@ web application from "Plain Old Java Objects" (POJOs).
 
 ### Dependency Injection
 
-The Spring Framework injects it's modules automagically when needed during the
-build process.
+The Spring Framework injects its modules automagically when required, during the
+build process. Focus on building your own application and not the 
 
 ### Modules
 
@@ -44,7 +44,7 @@ Spring organizes its features in a set of about 20 modules, grouped into:
 6. **Test**  
   Unit and Integration testing frameworks
 
-### Spring Boot
+## Spring Boot
 
 ## Goal
 
