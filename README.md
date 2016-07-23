@@ -36,10 +36,13 @@ Spring organizes its features in a set of about 20 modules, grouped into:
   This way we see `"John made a deposit"` when John makes a deposit.  
   AOP would allow us to write this rule in an aspect, keeping the transaction related code clean.
 3. **Messaging**  
-  aa
-4. Data Access/Integration
-5. Web
-6. Test
+  Support for integrating with messaging systems like AQMP and STOMP.
+4. **Data Access/Integration**  
+  This contains the `JDBC`, `ORM`, `OXM`, `JMS`, and `Transaction` modules.
+5. **Web**  
+   Things related to web, including HTTP, MVC and Web Sockets.
+6. **Test**  
+  Unit and Integration testing frameworks
 
 ### Spring Boot
 
