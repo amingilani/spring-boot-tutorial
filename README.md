@@ -1,6 +1,7 @@
 # Zero to Spring Boot in Seven Days
 
-This is the story of how I went from zero to Spring Boot in seven days, and how you can too. This entire article is based on my experience alone.
+This is the story of how I went from zero to Spring Boot in seven days, and how you can too. This entire article is based on my experience alone. Expect plenty
+of Nodejs and Ruby references.
 
 ## Spring
 
@@ -12,7 +13,9 @@ For this project, we'll be creating a Spring app that lets us sign in, and get a
 
 ## Maven
 
-A
+Maven is a build automation tool for Java projects. It defines project details, manages dependencies, and can execute builds. Loosely translated, it's
+like `package.json` and `grunt` for Java, all packaged into one, with Rails-like
+conventions instead of configurations.
 
 ## Prerequisites
 
