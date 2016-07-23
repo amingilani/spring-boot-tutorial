@@ -5,7 +5,22 @@ of Nodejs and Ruby references.
 
 ## Spring
 
-TODO
+The Spring Framework is Platform that provides you the building blocks to
+a great Java app. This lets you focus on business logic without
+being bogged down by the other stuff.
+
+While the Java Platform is robust, as a developer your time is better spent
+implementing your own application, as opposed to creating an ORM for your
+database layer, or a web framework. This is where Spring makes things easier.
+
+Spring provides a number of Java Objects which abstract away these low level
+tasks
+
+### Dependency Injection
+
+### Modules
+
+### Spring Boot
 
 ## Goal
 
