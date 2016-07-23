@@ -13,12 +13,33 @@ While the Java Platform is robust, as a developer your time is better spent
 implementing your own application, as opposed to creating an ORM for your
 database layer, or a web framework. This is where Spring makes things easier.
 
-Spring provides a number of Java Objects which abstract away these low level
-tasks
+Spring provides a number of Java objects which abstract away these low level
+tasks. These objects encapsulate best practices, and allow you to build a whole
+web application from "Plain Old Java Objects" (POJOs).
 
 ### Dependency Injection
 
+The Spring Framework injects it's modules automagically when needed during the
+build process.
+
 ### Modules
+
+![Spring Modules](http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/images/spring-overview.png)
+
+Spring organizes its features in a set of about 20 modules, grouped into:
+
+1. **Core**  
+  fundamental spring modules.
+2. **AOP and Instrumentation**  
+  an AOP implementation to help you decouple code that doesn't belong in business logic itself.  
+  e.g. running `Log( User + " made a " + transaction.type);` every time a user makes a transaction from their bank account.  
+  This way we see `"John made a deposit"` when John makes a deposit.  
+  AOP would allow us to write this rule in an aspect, keeping the transaction related code clean.
+3. **Messaging**  
+  aa
+4. Data Access/Integration
+5. Web
+6. Test
 
 ### Spring Boot
 
