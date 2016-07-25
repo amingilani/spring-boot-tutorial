@@ -2,50 +2,30 @@ package com.example;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class User {
 
-	@Id
-	@GeneratedValue
-	private Long id;
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private long id;
+    private String userName;
+    private String password;
 
-	private String userName;
+    protected User() {}
 
-	private String lastName;
+    public User(String userName, String password) {
+        this.userName = userName;
+        this.password = password;
+    }
 
-	protected User() {
-	}
+    @Override
+    public String toString() {
+        return String.format(
+                "User[id=%d, userName='%s', password='%s']",
+                id, userName, password);
+    }
 
-	public User(String userName, String lastName) {
-		this.userName = userName;
-		this.lastName = lastName;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	@Override
-	public String toString() {
-		return String.format("User[id=%d, userName='%s', lastName='%s']", id,
-				userName, lastName);
-	}
 }
