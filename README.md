@@ -64,7 +64,7 @@ Getting up and running with a Spring application can be daunting, that's why Spr
 The idea is that Spring Boot lets you bootstrap your project, and then gets out
 of your way as the project starts becoming more complex.
 
-### Building the application
+## Building the application
 
 Let's break this down into subtasks:
 
