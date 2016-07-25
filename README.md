@@ -3,6 +3,19 @@
 This is the story of how I went from zero to Spring Boot in seven days, and how you can too. This entire article is based on my experience alone. Expect plenty
 of Nodejs and Ruby references.
 
+## Goal
+
+For this project, we'll be creating a Spring app that lets us sign in, and get advice.
+
+### Prerequisites
+
+It is assumed that you:
+
+  - Can use Git
+  - Are comfortable with the command line
+  - Have prior programming experience
+
+
 ## Spring
 
 The Spring Framework is Platform that provides you the building blocks to
@@ -44,32 +57,49 @@ Spring organizes its features in a set of about 20 modules, grouped into:
 6. **Test**  
   Unit and Integration testing frameworks
 
-## Spring Boot
+### Spring Boot
 
 Getting up and running with a Spring application can be daunting, that's why Spring Boot "takes and opinionated view of building Spring applications and gets you up and running as quickly as possible."
 
 The idea is that Spring Boot lets you bootstrap your project, and then gets out
 of your way as the project starts becoming more complex.
 
-## Goal
+### Building the application
 
-For this project, we'll be creating a Spring app that lets us sign in, and get advice.
+Let's break this down into subtasks:
 
-## Maven
+1. **Making A Web App**  
+  A Spring MVC app that serves static content
+
+2. **Securing The Web App**  
+  Using Spring Security to enable authentication for the with an in-memory user
+
+3. **Attaching a Database**  
+  Creating Models for our User and saving them to a database on registration.
+
+4. **Switching Spring Security to Use The Database**  
+  Making Spring Security use our User Model for Authentication.
+
+### Making A Web App
+
+To get started with a Spring Boot project, the quickest way is to use [Spring Initializer](https://start.spring.io) and select all the modules that you would require. For this project we'll need:
+
+1. Web
+2. Thymeleaf
+3. JPA
+4. JDBC
+5. H2
+6. Security
+
+We'll be using Maven for our build.
+
+#### Maven
 
 Maven is a build automation tool for Java projects. It defines project details, manages dependencies, and can execute builds. Loosely translated, it's
 like `package.json` and `grunt` for Java, all packaged into one, with Rails-like
 conventions instead of configurations.
 
-## Prerequisites
-
-It is assumed that you:
-
-  - Can Git it
-  - Are comfortable with the command line
-  - Have prior programming experience
-
-## Precursors
+## Resources
 
   1. Learn Java
     - [Codecademy](https://www.codecademy.com/learn/learn-java)
@@ -78,5 +108,7 @@ It is assumed that you:
     - [Maven in 5 Minutes](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html)
     - [Getting Started with Maven](http://spring.io/guides/gs/maven/)
   3. Spring:
-    - [Spring Framework Quickstart](https://projects.spring.io/spring-framework/) -- Don't go deep
+    - [Spring Framework Quickstart](https://projects.spring.io/spring-framework/)
+    - [Spring Framework Reference](http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/)
     - [Spring Boot Quickstart](http://projects.spring.io/spring-boot/)
+    - [Spring Boot Reference Documentation](http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle)
