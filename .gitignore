@@ -22,3 +22,4 @@ hs_err_pid*
 **/dependency-reduced-pom.xml
 **/buildNumber.properties
 **/.mvn/timing.properties
+myapp.log
