@@ -1,68 +1,51 @@
-package com.example.models;
+package com.example;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Transient;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
-import org.hibernate.validator.constraints.Email;
 
 @Entity
 public class User {
-    @GeneratedValue
-    @Id
-    private Long id;
 
-    @NotNull
-    @Size(min = 3, max = 100, message = "Username must at least 3 characters.")
-    private String userName;
+	@Id
+	@GeneratedValue
+	private Long id;
 
-    @NotNull
-    @Size(min = 3, max = 100, message = "Password must at least 3 characters.")
-    private String password;
+	private String userName;
 
-    @Transient
-    private String confirmPassword;
+	private String lastName;
 
-    @Email(message = "Email address is not valid.")
-    @NotNull
-    private String email;
+	protected User() {
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public User(String userName, String lastName) {
+		this.userName = userName;
+		this.lastName = lastName;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getUserName() {
-        return userName;
-    }
+	public String getUserName() {
+		return userName;
+	}
 
-    public void setUserName(String name) {
-        this.userName = name;
-    }
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public String getLastName() {
+		return lastName;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-    }
-
-    public Boolean isMatchingPasswords() {
-        return this.password.equals(this.confirmPassword);
-    }
+	@Override
+	public String toString() {
+		return String.format("User[id=%d, userName='%s', lastName='%s']", id,
+				userName, lastName);
+	}
 }
