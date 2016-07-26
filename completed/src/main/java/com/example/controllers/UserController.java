@@ -19,34 +19,38 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 
-// import com.example.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 
 
 @Controller
 public class UserController {
 
+  private static final Logger log = LoggerFactory.getLogger(DemoApplication.class);
+
   @Autowired
   private UserRepository userRepository;
 
   @RequestMapping(value = "/user/register", method = RequestMethod.GET)
-  public String register() {
+  public String register(User user) {
       return "/user/register";
   }
 
-  // @RequestMapping(value = "/user/register", method = RequestMethod.POST)
-  // public String registerPost(@Valid User user, BindingResult result) {
-  //     if (result.hasErrors()) {
-  //         return "user/register";
-  //     }
-  //
-  //     User registeredUser = userService.register(user);
-  //     if (registeredUser != null) {
-  //         return "user/register-success";
-  //     } else {
-  //         result.rejectValue("email", "error.alreadyExists", "This username or email already exists, please try to reset password instead.");
-  //         return "user/register";
-  //     }
-  // }
+  @RequestMapping(value = "/user/register", method = RequestMethod.POST)
+  public String registerPost(@Valid User user, BindingResult result, UserRepository repository) {
+      if (result.hasErrors()) {
+          return "user/register";
+      }
+
+      User registeredUser = repository.save(user);
+      if (registeredUser != null) {
+          return "user/register-success";
+      } else {
+          result.rejectValue("email", "error.alreadyExists", "This username or email already exists, please try to reset password instead.");
+          return "user/register";
+      }
+  }
 
 }
