@@ -21,6 +21,22 @@ public class User {
         this.password = password;
     }
 
+		public String getUserName(){
+			return this.userName;
+		}
+
+		public void setUserName(String userName) {
+			this.userName = userName;
+		}
+
+		public String getPassword() {
+			return this.password;
+		}
+
+		public void setPassword(String password) {
+			this.password = password;
+		}
+
     @Override
     public String toString() {
         return String.format(

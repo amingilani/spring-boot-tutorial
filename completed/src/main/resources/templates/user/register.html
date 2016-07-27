@@ -7,7 +7,6 @@
     <div>
         <form class="form-signin" th:action="@{/user/register}" th:object="${user}" action="/user/register" method="post">
             <h2 class="form-signin-heading">Please register</h2>
-            <input type="text" id="inputEmail" name="email" class="form-control top" placeholder="Email" required="required" autofocus="autofocus"/>
             <input type="text" id="inputUser" name="userName" class="form-control middle" placeholder="Username" required="required"/>
             <input type="password" id="inputPassword" name="password" class="form-control bottom" placeholder="Password" required="required"/>
 
