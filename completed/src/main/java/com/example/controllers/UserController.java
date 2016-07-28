@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import org.springframework.web.context.request.WebRequest;
+
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -28,29 +30,35 @@ import org.slf4j.LoggerFactory;
 @Controller
 public class UserController {
 
-  private static final Logger log = LoggerFactory.getLogger(DemoApplication.class);
+private static final Logger log = LoggerFactory.getLogger(DemoApplication.class);
 
-  @Autowired
-  private UserRepository userRepository;
+@RequestMapping(value = "/user/registration", method = RequestMethod.GET)
+public String showRegistrationForm(WebRequest request, Model model) {
+        UserDto userDto = new UserDto();
+        model.addAttribute("user", userDto);
+        return "registration";
+}
 
-  @RequestMapping(value = "/user/register", method = RequestMethod.GET)
-  public String register(User user) {
-      return "/user/register";
-  }
+@RequestMapping(value = "/user/registration", method = RequestMethod.POST)
+public ModelAndView registerUserAccount(@ModelAttribute("user") @Valid UserDto accountDto,
+                                        BindingResult result, WebRequest request, Errors errors) {
+        User registered = new User();
+        if (!result.hasErrors()) {
+                registered = createUserAccount(accountDto, result);
+        }
+        if (registered == null) {
+                result.rejectValue("email", "message.regError");
+        }
+        // rest of the implementation
+}
+private User createUserAccount(UserDto accountDto, BindingResult result) {
+        User registered = null;
+        try {
+                registered = service.registerNewUserAccount(accountDto);
+        } catch (EmailExistsException e) {
+                return null;
+        }
+        return registered;
 
-  @RequestMapping(value = "/user/register", method = RequestMethod.POST)
-  public String registerPost(@Valid User user, BindingResult result, UserRepository repository) {
-      if (result.hasErrors()) {
-          return "user/register";
-      }
-
-      User registeredUser = repository.save(user);
-      if (registeredUser != null) {
-          return "user/register-success";
-      } else {
-          result.rejectValue("email", "error.alreadyExists", "This username or email already exists, please try to reset password instead.");
-          return "user/register";
-      }
-  }
-
+}
 }
