@@ -19,9 +19,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 
 
-
 @Service
-@Transactional
 public class MyUserDetailsService implements UserDetailsService {
 
 @Autowired
