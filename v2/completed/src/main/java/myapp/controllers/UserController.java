@@ -33,15 +33,7 @@ private UserRepository repository;
 
 @RequestMapping(value = "/", method = RequestMethod.GET)
 public String showLoginForm() {
-        return "registrations/login";
-}
-
-
-@RequestMapping(value = "/register", method = RequestMethod.GET)
-public String showRegistrationForm(WebRequest request, Model model) {
-        User user = new User();
-        model.addAttribute("user", user);
-        return "registrations/register";
+        return "login";
 }
 
 @RequestMapping(value = "/register", method = RequestMethod.POST)
