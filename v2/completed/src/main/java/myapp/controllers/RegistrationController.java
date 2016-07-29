@@ -57,7 +57,7 @@ public String registerUserAccount(WebRequest request,
 
 
         }
-        return "redirect:/";
+        return "redirect:/advice";
 
 }
 }
