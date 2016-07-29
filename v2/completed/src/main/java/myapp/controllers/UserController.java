@@ -26,7 +26,7 @@ import javax.validation.Valid;
 
 
 @Controller
-public class RegistrationController {
+public class UserController {
 
 @Autowired
 private UserRepository repository;
