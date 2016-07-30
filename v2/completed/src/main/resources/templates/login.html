@@ -10,12 +10,36 @@
 </head>
 
 <body>
+    <div th:if="${param.error}">
+        Invalid username and password.
+    </div>
+    <div th:if="${param.logout}">
+        You have been logged out.
+    </div>
     <div class="form">
         <ul class="tab-group">
-            <li class="tab active"><a href="#signup">Sign Up</a></li>
-            <li class="tab"><a href="#login">Log In</a></li>
+            <li class="tab active"><a href="#login">Log In</a></li>
+            <li class="tab"><a href="#signup">Sign Up</a></li>
         </ul>
         <div class="tab-content">
+            <div id="login">
+                <h1>Get your advice inside!</h1>
+                <form th:action="@{/}" method="post">
+                    <div class="field-wrap">
+                        <label>
+                            Username<span class="req">*</span>
+                        </label>
+                        <input name="username" type="text" required="true" autocomplete="off" />
+                    </div>
+                    <div class="field-wrap">
+                        <label>
+                            Password<span class="req">*</span>
+                        </label>
+                        <input name="password" type="password" required="true" autocomplete="off" />
+                    </div>
+                    <button class="button button-block">Log In</button>
+                </form>
+            </div>
             <div id="signup">
                 <h1>Sign Up for some advice.</h1>
                 <form th:action="@{/register}" th:object="${user}" method="post">
@@ -32,24 +56,6 @@
                         <input name="password" type="password" required="true" autocomplete="off" />
                     </div>
                     <button type="submit" class="button button-block">Get Started</button>
-                </form>
-            </div>
-            <div id="login">
-                <h1>Welcome Back! Get your advice inside!</h1>
-                <form th:action="@{/}" method="post">
-                  <div class="field-wrap">
-                      <label>
-                          Username<span class="req">*</span>
-                      </label>
-                      <input name="username" type="text" required="true" autocomplete="off" />
-                  </div>
-                  <div class="field-wrap">
-                      <label>
-                          Password<span class="req">*</span>
-                      </label>
-                      <input name="password" type="password" required="true" autocomplete="off" />
-                  </div>
-                    <button class="button button-block">Log In</button>
                 </form>
             </div>
         </div>

@@ -21,6 +21,7 @@ protected void configure(HttpSecurity http) throws Exception {
         .and()
         .formLogin()
         .loginPage("/")
+        .defaultSuccessUrl("/advice")
         .permitAll()
         .and()
         .logout()
