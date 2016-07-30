@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-    <head>
-        <title>Spring Boot Tutorial | Login</title>
-    </head>
-    <body>
-        <div th:if="${param.error}">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <title>Spring Boot Tutorial | Login</title>
+</head>
+
+<body>
+    <!-- <div th:if="${param.error}">
             Invalid username and password.
         </div>
         <div th:if="${param.logout}">
@@ -18,16 +19,62 @@
             <div><input type="submit" value="Sign In"/></div>
             <div><a href="/register">Register</a></div>
         </form>
-
         <div>
             <form th:action="@{/register}" th:object="${user}" action="/register" method="post">
                 <div><h2>Register</h2></div>
                 <div><input type="text" id="inputUser" name="userName" /></div>
                 <div><input type="password" id="inputPassword" name="password" /></div>
-
                 <button>Register</button>
             </form>
+        </div> -->
+    <div class="form">
+        <ul class="tab-group">
+            <li class="tab active"><a href="#signup">Sign Up</a></li>
+            <li class="tab"><a href="#login">Log In</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="signup">
+                <h1>Sign Up for Free</h1>
+                <form th:action="@{/register}" th:object="${user}">
+                    <div class="field-wrap">
+                        <label>
+                            Userame<span class="req">*</span>
+                        </label>
+                        <input name="userName" type="text" required="true" autocomplete="off" />
+                    </div>
+                    <div class="field-wrap">
+                        <label>
+                            Set A Password<span class="req">*</span>
+                        </label>
+                        <input name="password" type="password" required="true" autocomplete="off" />
+                    </div>
+                    <button type="submit" class="button button-block">Get Started</button>
+                </form>
+            </div>
+            <div id="login">
+                <h1>Welcome Back!</h1>
+                <form th:action="@{/}" method="post">
+                  <div class="field-wrap">
+                      <label>
+                          Userame<span class="req">*</span>
+                      </label>
+                      <input name="username" type="text" required="true" autocomplete="off" />
+                  </div>
+                  <div class="field-wrap">
+                      <label>
+                          Set A Password<span class="req">*</span>
+                      </label>
+                      <input name="password" type="password" required="true" autocomplete="off" />
+                  </div>
+                    <button class="button button-block">Log In</button>
+                </form>
+            </div>
         </div>
+        <!-- tab-content -->
+    </div>
+    <!-- /form -->
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="js/index.js"></script>
+</body>
 
-    </body>
 </html>
