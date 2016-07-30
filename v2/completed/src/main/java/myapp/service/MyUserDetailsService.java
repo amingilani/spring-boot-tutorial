@@ -1,4 +1,4 @@
-package myapp;
+package myapp.service;
 
 import java.util.List;
 
@@ -11,6 +11,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+
+import myapp.repository.UserRepository;
+import myapp.entity.User;
+
 
 
 @Service
