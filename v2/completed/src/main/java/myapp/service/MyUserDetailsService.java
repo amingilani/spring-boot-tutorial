@@ -39,10 +39,6 @@ throws UsernameNotFoundException {
         List<GrantedAuthority> auth = AuthorityUtils
                                       .commaSeparatedStringToAuthorityList("ROLE_USER");
         String password = user.getPassword();
-        return new org.springframework.security.core.userdetails.User(userName, password,
-                                                                      auth);
+        return new org.springframework.security.core.userdetails.User(userName, password,                                                                      auth);
 }
-
-
-
 }

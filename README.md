@@ -79,7 +79,7 @@ Let's break this down into subtasks:
 1. **Making A Web App**  
   A Spring MVC app that serves static content
 
-2. **Attaching a Database**  
+2. **Adding Sign Up functionality**  
   Creating Models for our User and saving them to a database on registration.
 
 3. **Securing The Web App**  
@@ -138,7 +138,7 @@ everything behind a `401 Unauthorized` error, which isn't needed at the moment.
 The first and page we'll build is the simples, a page that displays advice to the visitor, this will later on be our
 password protected page
 
-#### Adding template
+##### Adding template
 
 ```html
 <!-- main/resources/templates/advice.html -->
@@ -183,7 +183,7 @@ This uses jQuery to fetch a JSON object from the api at adviceslips.com, and rep
 ##### Adding an advice controller
 
 ```java
-// myapp/controller/AdviceController.java
+// main/java/myapp/controller/AdviceController.java
 @Controller
 public class AdviceController {
 
@@ -196,6 +196,499 @@ public String showAdvice() {
 
 ```
 This controller maps on the Thymeleaf template onto `GET /advice`
+
+### Adding Sign Up functionality
+
+We'll now be:
+
+1. Creating a User Entity
+2. Creating a User Repository
+3. Creating a Signup page
+
+#### Creating a User Entity
+
+```java
+// main/java/myapp/entity/User.java
+@Entity
+public class User {
+
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private long id;
+    private String userName;
+    private String password;
+
+    protected User() {}
+
+    public User(String userName, String password) {
+        this.userName = userName;
+        this.password = password;
+    }
+
+// standard getters and setters
+
+    @Override
+    public String toString() {
+        return String.format(
+                "User[id=%d, userName='%s', password='%s']",
+                id, userName, password);
+    }
+
+}
+
+```
+
+This is the entity that will be saved to our database, a User only has a `username` and `password`
+
+#### Creating a User Repository
+
+```java
+public interface UserRepository extends CrudRepository<User, Long> {
+
+User findByUserName(String UserName);
+}
+```
+
+This repository inherits from the `CrudRepository` in the `data` dependency, and loads users from their usernames
+
+#### Creating a Signup page
+
+
+#### Add the template
+
+First add [normalize.css](github.com/necolas/normalize.css) to `main/resources/static/css/normalize.css`
+
+```html
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <title>Spring Boot Tutorial | Login</title>
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="/assets/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css" />
+
+</head>
+
+<body>
+    <div th:if="${param.error}">
+        Invalid username and password.
+    </div>
+    <div th:if="${param.logout}">
+        You have been logged out.
+    </div>
+    <div class="form">
+        <ul class="tab-group">
+            <li class="tab active"><a href="#login">Log In</a></li>
+            <li class="tab"><a href="#signup">Sign Up</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="login">
+                <h1>Get your advice inside!</h1>
+                <form th:action="@{/}" method="post">
+                    <div class="field-wrap">
+                        <label>
+                            Username<span class="req">*</span>
+                        </label>
+                        <input name="username" type="text" required="true" autocomplete="off" />
+                    </div>
+                    <div class="field-wrap">
+                        <label>
+                            Password<span class="req">*</span>
+                        </label>
+                        <input name="password" type="password" required="true" autocomplete="off" />
+                    </div>
+                    <button class="button button-block">Log In</button>
+                </form>
+            </div>
+            <div id="signup">
+                <h1>Sign Up for some advice.</h1>
+                <form th:action="@{/register}" th:object="${user}" method="post">
+                    <div class="field-wrap">
+                        <label>
+                            Username<span class="req">*</span>
+                        </label>
+                        <input name="userName" type="text" required="true" autocomplete="off" />
+                    </div>
+                    <div class="field-wrap">
+                        <label>
+                            Set A Password<span class="req">*</span>
+                        </label>
+                        <input name="password" type="password" required="true" autocomplete="off" />
+                    </div>
+                    <button type="submit" class="button button-block">Get Started</button>
+                </form>
+            </div>
+        </div>
+        <!-- tab-content -->
+    </div>
+    <!-- /form -->
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="/assets/js/login.js"></script>
+</body>
+
+</html>
+```
+This adds a sign up and sign in page in one fell swoop.
+
+```css
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+  background: #c1bdba;
+  font-family: 'Titillium Web', sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #1ab188;
+  -webkit-transition: .5s ease;
+  transition: .5s ease;
+}
+a:hover {
+  color: #179b77;
+}
+
+.form {
+  background: rgba(19, 35, 47, 0.9);
+  padding: 40px;
+  max-width: 600px;
+  margin: 40px auto;
+  border-radius: 4px;
+  box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+}
+
+.tab-group {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 40px 0;
+}
+.tab-group:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.tab-group li a {
+  display: block;
+  text-decoration: none;
+  padding: 15px;
+  background: rgba(160, 179, 176, 0.25);
+  color: #a0b3b0;
+  font-size: 20px;
+  float: left;
+  width: 50%;
+  text-align: center;
+  cursor: pointer;
+  -webkit-transition: .5s ease;
+  transition: .5s ease;
+}
+.tab-group li a:hover {
+  background: #179b77;
+  color: #ffffff;
+}
+.tab-group .active a {
+  background: #1ab188;
+  color: #ffffff;
+}
+
+.tab-content > div:last-child {
+  display: none;
+}
+
+h1 {
+  text-align: center;
+  color: #ffffff;
+  font-weight: 300;
+  margin: 0 0 40px;
+}
+
+label {
+  position: absolute;
+  -webkit-transform: translateY(6px);
+          transform: translateY(6px);
+  left: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  -webkit-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+  -webkit-backface-visibility: hidden;
+  pointer-events: none;
+  font-size: 22px;
+}
+label .req {
+  margin: 2px;
+  color: #1ab188;
+}
+
+label.active {
+  -webkit-transform: translateY(50px);
+          transform: translateY(50px);
+  left: 2px;
+  font-size: 14px;
+}
+label.active .req {
+  opacity: 0;
+}
+
+label.highlight {
+  color: #ffffff;
+}
+
+input, textarea {
+  font-size: 22px;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 5px 10px;
+  background: none;
+  background-image: none;
+  border: 1px solid #a0b3b0;
+  color: #ffffff;
+  border-radius: 0;
+  -webkit-transition: border-color .25s ease, box-shadow .25s ease;
+  transition: border-color .25s ease, box-shadow .25s ease;
+}
+input:focus, textarea:focus {
+  outline: 0;
+  border-color: #1ab188;
+}
+
+textarea {
+  border: 2px solid #a0b3b0;
+  resize: vertical;
+}
+
+.field-wrap {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.top-row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.top-row > div {
+  float: left;
+  width: 48%;
+  margin-right: 4%;
+}
+.top-row > div:last-child {
+  margin: 0;
+}
+
+.button {
+  border: 0;
+  outline: none;
+  border-radius: 0;
+  padding: 15px 0;
+  font-size: 2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  background: #1ab188;
+  color: #ffffff;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  -webkit-appearance: none;
+}
+.button:hover, .button:focus {
+  background: #179b77;
+}
+
+.button-block {
+  display: block;
+  width: 100%;
+}
+
+.forgot {
+  margin-top: -20px;
+  text-align: right;
+}
+```
+
+Standard styling.
+
+```js
+$('.form').find('input, textarea').on('keyup blur focus', function(e) {
+
+    var $this = $(this),
+        label = $this.prev('label');
+
+    if (e.type === 'keyup') {
+        if ($this.val() === '') {
+            label.removeClass('active highlight');
+        } else {
+            label.addClass('active highlight');
+        }
+    } else if (e.type === 'blur') {
+        if ($this.val() === '') {
+            label.removeClass('active highlight');
+        } else {
+            label.removeClass('highlight');
+        }
+    } else if (e.type === 'focus') {
+
+        if ($this.val() === '') {
+            label.removeClass('highlight');
+        } else if ($this.val() !== '') {
+            label.addClass('highlight');
+        }
+    }
+
+});
+
+$('.tab a').on('click', function(e) {
+
+    e.preventDefault();
+
+    $(this).parent().addClass('active');
+    $(this).parent().siblings().removeClass('active');
+
+    target = $(this).attr('href');
+
+    $('.tab-content > div').not(target).hide();
+
+    $(target).fadeIn(600);
+
+});
+
+```
+Standard Javascript.
+
+#### Creating a controller
+
+```java
+@Controller
+public class UserController {
+
+@Autowired
+private UserRepository repository;
+
+@RequestMapping(value = "/", method = RequestMethod.GET)
+public String showLoginForm() {
+        return "login";
+}
+
+@RequestMapping(value = "/register", method = RequestMethod.POST)
+public String registerUserAccount(WebRequest request,
+                                  @ModelAttribute("user") @Valid User user,
+                                  BindingResult result) {
+        if (!result.hasErrors()) {
+                repository.save(user);
+
+                System.out.println("saved the user!");
+                System.out.println(
+                        repository.findByUserName(user.getUserName() ));
+
+
+        }
+        return "redirect:/advice";
+
+}
+}
+```
+
+This will map our login and registration form to the index.
+
+### Securing Our Web App
+
+To let our registered users use Spring Security
+
+#### Uncomment Spring Security
+
+Remember when we first commented out Spring Security in our POM file? Well, it's time to uncomment it.
+
+```xml
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+```
+
+#### Create a custom UserDetailsService
+
+```java
+// main/java/myapp/service/MyUserDetailsService.java
+@Service
+@Transactional
+public class MyUserDetailsService implements UserDetailsService {
+
+@Autowired
+private UserRepository userRepository;
+
+
+public MyUserDetailsService() {
+        super();
+}
+
+@Override
+public UserDetails loadUserByUsername(String userName)
+throws UsernameNotFoundException {
+        User user = userRepository.findByUserName(userName);
+        if (user == null) {
+                return null;
+        }
+        List<GrantedAuthority> auth = AuthorityUtils
+                                      .commaSeparatedStringToAuthorityList("ROLE_USER");
+        String password = user.getPassword();
+        return new org.springframework.security.core.userdetails.User(userName, password,                                                                      auth);
+}
+}
+```
+
+This returns looks up and returns a version of User compatible with Spring Security
+
+#### Configure Spring Security
+
+```java
+// main/java/myapp/configuration/WebSecurityConfig.java
+Configuration
+@EnableWebSecurity
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+@Override
+protected void configure(HttpSecurity http) throws Exception {
+        http
+        .authorizeRequests()
+        .antMatchers("/", "/register", "/assets/**").permitAll()
+        .anyRequest().authenticated()
+        .and()
+        .formLogin()
+        .loginPage("/")
+        .defaultSuccessUrl("/advice")
+        .permitAll()
+        .and()
+        .logout()
+        .permitAll();
+}
+
+@Autowired
+private UserDetailsService userDetailsService;
+
+@Autowired
+public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService);
+}
+}
+```
+Finally we configure with pages are public and which pages require a login.
+
+## Further Steps
+
+We now have a basic application with authentication, but this is still not secure, things you should try yourself are:
+
+1. Using Bcrypt to salt and hash passwords
+2. Add email and other information to Users
+3. Send an activation email
+4. Password Reset options
+
+Or you could skip all this and try out [Auth0](https://auth0.com)
+
 
 ## Resources
 
