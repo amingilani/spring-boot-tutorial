@@ -18,7 +18,7 @@
         <div class="tab-content">
             <div id="signup">
                 <h1>Sign Up for some advice.</h1>
-                <form th:action="@{/register}" th:object="${user}">
+                <form th:action="@{/register}" th:object="${user}" method="post">
                     <div class="field-wrap">
                         <label>
                             Username<span class="req">*</span>
