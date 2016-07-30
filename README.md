@@ -114,8 +114,20 @@ We'll be using Maven for our build.
 TLDR: run:
 `curl start.spring.io/starter.zip -d dependencies=web,data-jpa,thymeleaf,h2,security -d javaVersion=1.8 -d applicationName=myapp -d artifactId=myapp -d packageName=myapp -d type=maven-project -d packaging=jar -o initial.zip`
 
+Go ahead and explore the `pom.xml` file, this is the manifest for your project
 
-#### 1. Spring
+
+#### Making A Web App
+
+First, go ahead and comment the `spring-boot-starter-security` dependency. Until we configure the `security` package, it defaults to restricting
+everything behind a `401 Unauthorized` error.
+
+```xml
+<!-- <dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-web</artifactId>
+</dependency> -->
+```
 
 ## Resources
 
