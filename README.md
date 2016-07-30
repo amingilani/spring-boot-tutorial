@@ -111,6 +111,9 @@ you would require. For this project we'll need:
 
 We'll be using Maven for our build.
 
+TLDR: run:
+`curl start.spring.io/starter.zip -d dependencies=web,data-jpa,thymeleaf,h2,security -d javaVersion=1.8 -d applicationName=myapp -d artifactId=myapp -d packageName=myapp -d type=maven-project -d packaging=jar -o initial.zip`
+
 
 #### 1. Spring
 
