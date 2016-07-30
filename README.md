@@ -59,14 +59,22 @@ Spring organizes its features in a set of about 20 modules, grouped into:
 
 ### Spring Boot
 
-Getting up and running with a Spring application can be daunting, that's why Spring Boot "takes and opinionated view of building Spring applications and gets you up and running as quickly as possible."
+Getting a Spring application running can be tedious and daunting. That's why
+Spring Boot "takes and opinionated view of building Spring applications and gets
+you up and running as quickly as possible."
 
 The idea is that Spring Boot lets you bootstrap your project, and then gets out
 of your way as the project starts becoming more complex.
 
+Spring boot also uses a large amount of convention over configuration, so a lot
+of times *things just work.*
+
 ## Building the application
 
 Let's break this down into subtasks:
+
+0. **Bootstrapping with Spring Initializer**  
+  Precursors to the project
 
 1. **Making A Web App**  
   A Spring MVC app that serves static content
@@ -80,24 +88,31 @@ Let's break this down into subtasks:
 4. **Switching Spring Security to Use The Database**  
   Making Spring Security use our User Model for Authentication.
 
-### Making A Web App
+We'll be using Maven for our build.
 
-To get started with a Spring Boot project, the quickest way is to use [Spring Initializer](https://start.spring.io) and select all the modules that you would require. For this project we'll need:
+### Maven
+
+Maven is a build automation tool for Java projects. It defines project details,
+manages dependencies, and can execute builds. Loosely translated, it's
+like `package.json` and `grunt` for Java, all packaged into one, with build
+conventions baked in.
+
+### Bootstrapping with Spring Initializers
+
+To get started with a Spring Boot project, the quickest way is to use
+[Spring Initializer](https://start.spring.io) and select all the modules that
+you would require. For this project we'll need:
 
 1. Web
 2. Thymeleaf
 3. JPA
-4. JDBC
-5. H2
-6. Security
+4. H2
+5. Security
 
 We'll be using Maven for our build.
 
-#### Maven
 
-Maven is a build automation tool for Java projects. It defines project details, manages dependencies, and can execute builds. Loosely translated, it's
-like `package.json` and `grunt` for Java, all packaged into one, with Rails-like
-conventions instead of configurations.
+#### 1. Spring
 
 ## Resources
 
