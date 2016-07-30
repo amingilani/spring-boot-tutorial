@@ -79,11 +79,11 @@ Let's break this down into subtasks:
 1. **Making A Web App**  
   A Spring MVC app that serves static content
 
-2. **Securing The Web App**  
-  Using Spring Security to enable authentication for the with an in-memory user
-
-3. **Attaching a Database**  
+2. **Attaching a Database**  
   Creating Models for our User and saving them to a database on registration.
+
+3. **Securing The Web App**  
+  Using Spring Security to enable authentication for the with an in-memory user
 
 4. **Switching Spring Security to Use The Database**  
   Making Spring Security use our User Model for Authentication.
@@ -117,10 +117,14 @@ TLDR: run:
 Go ahead and explore the `pom.xml` file, this is the manifest for your project
 
 
-#### Making A Web App
+### Making A Web App
 
-First, go ahead and comment the `spring-boot-starter-security` dependency. Until we configure the `security` package, it defaults to restricting
-everything behind a `401 Unauthorized` error.
+We're going to make a web application with no security.
+
+#### Removing Security
+
+First, go ahead and temporarily comment the `spring-boot-starter-security` dependency, until we configure the `security` package later on. It defaults to restricting
+everything behind a `401 Unauthorized` error, which isn't needed at the moment.
 
 ```xml
 <!-- <dependency>
@@ -128,6 +132,70 @@ everything behind a `401 Unauthorized` error.
   <artifactId>spring-boot-starter-web</artifactId>
 </dependency> -->
 ```
+
+#### Building the Advice page
+
+The first and page we'll build is the simples, a page that displays advice to the visitor, this will later on be our
+password protected page
+
+#### Adding template
+
+```html
+<!-- main/resources/templates/advice.html -->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <title>Spring Boot Tutorial | Login</title>
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="/assets/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css" />
+
+</head>
+
+<body>
+    <h2 id="advice">Wait for it...</h2>
+    <button class="advice">more</button>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="/assets/js/advice.js"></script>
+</body>
+
+</html>
+```
+
+The HTML above should be quite simple to understand. It displays a line of text that says 'Wait for it...' and a 'more button'
+
+```js
+var getAdvice = function() {
+    $.getJSON('http://api.adviceslip.com/advice', function(data) {
+        $("h2#advice").replaceWith('<h2 id="advice">' + data.slip.advice + '</h2>');
+    });
+};
+
+getAdvice();
+
+$('button.advice').on('click', function() {
+    getAdvice();
+});
+```
+This uses jQuery to fetch a JSON object from the api at adviceslips.com, and replaces the "Wait for it..." on the html. It also adds functionality to our button.
+
+##### Adding an advice controller
+
+```java
+// myapp/controller/AdviceController.java
+@Controller
+public class AdviceController {
+
+@RequestMapping(value = "/advice", method = RequestMethod.GET)
+public String showAdvice() {
+        return "advice";
+}
+
+}
+
+```
+This controller maps on the Thymeleaf template onto `GET /advice`
 
 ## Resources
 
