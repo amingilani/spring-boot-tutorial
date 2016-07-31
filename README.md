@@ -1,7 +1,7 @@
 # Zero to Spring Boot in Seven Days
 
 This is the story of how I went from zero to Spring Boot in seven days, and how you can too. This entire article is based on my experience alone. Expect plenty
-of Nodejs and Ruby references.
+of Node and Ruby references.
 
 ## Goal
 
@@ -24,9 +24,9 @@ being bogged down by the other stuff.
 
 While the Java Platform is robust, as a developer your time is better spent
 implementing your own application, as opposed to creating an ORM for your
-database layer, or a web framework. This is where Spring makes things easier.
+database layer, or a web framework. This is where Spring makes your job easier.
 
-Spring provides a number of Java objects which abstract away these low level
+Spring provides Java objects which abstract away these low level
 tasks. These objects encapsulate best practices, and allow you to build a whole
 web application from "Plain Old Java Objects" (POJOs).
 
@@ -53,7 +53,7 @@ Spring organizes its features in a set of about 20 modules, grouped into:
 4. **Data Access/Integration**  
   This contains the `JDBC`, `ORM`, `OXM`, `JMS`, and `Transaction` modules.
 5. **Web**  
-   Things related to web, including HTTP, MVC and Web Sockets.
+   Modules related to web, including HTTP, MVC and Web Sockets.
 6. **Test**  
   Unit and Integration testing frameworks
 
@@ -61,13 +61,12 @@ Spring organizes its features in a set of about 20 modules, grouped into:
 
 Getting a Spring application running can be tedious and daunting. That's why
 Spring Boot "takes and opinionated view of building Spring applications and gets
-you up and running as quickly as possible."
+you up and running as fast as possible."
 
 The idea is that Spring Boot lets you bootstrap your project, and then gets out
 of your way as the project starts becoming more complex.
 
-Spring boot also uses a large amount of convention over configuration, so a lot
-of times *things just work.*
+Spring boot also uses a large amount of convention over configuration, so if you place your pieces correctly, everything just works.
 
 ## Building the application
 
@@ -163,7 +162,7 @@ password protected page
 </html>
 ```
 
-The HTML above should be quite simple to understand. It displays a line of text that says 'Wait for it...' and a 'more button'
+The HTML above should be simple to understand. It displays a line of text that says 'Wait for it...' and a 'more button'
 
 ```js
 var getAdvice = function() {
@@ -678,7 +677,7 @@ public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception 
 ```
 Finally we configure with pages are public and which pages require a login.
 
-## Further Steps
+## Things to try next
 
 We now have a basic application with authentication, but this is still not secure, things you should try yourself are:
 
@@ -689,6 +688,13 @@ We now have a basic application with authentication, but this is still not secur
 
 Or you could skip all this and try out [Auth0](https://auth0.com)
 
+## Final Thoughts
+
+Spring boot feels to be extremely modular with components for everything. While
+this tutorial focused on building a monolithic MVC application, the pieces
+available allow opportunities ranging from a simple website, to complex micro
+services for a large system, aided by robust modules for your choice of
+messaging protocols.
 
 ## Resources
 
