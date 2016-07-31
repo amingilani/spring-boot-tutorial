@@ -709,3 +709,7 @@ messaging protocols.
     - [Spring Framework Reference](http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/)
     - [Spring Boot Quickstart](http://projects.spring.io/spring-boot/)
     - [Spring Boot Reference Documentation](http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle)
+
+## Thanks:
+
+1. Eric for the [sign up and login form](http://codepen.io/ehermanson/pen/KwKWEv)
