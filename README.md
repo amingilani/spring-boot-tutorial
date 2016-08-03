@@ -2,6 +2,40 @@
 
 This is the story of how I went from zero to Spring Boot in seven days, and how you can too. This entire article is based on my experience alone. Expect plenty of Node and Ruby references.
 
+<!-- TOC depthFrom:1 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
+
+- [Zero to Spring Boot in Seven Days](#zero-to-spring-boot-in-seven-days)
+	- [Goal](#goal)
+		- [Prerequisites](#prerequisites)
+	- [Spring](#spring)
+		- [Dependency Injection](#dependency-injection)
+		- [Modules](#modules)
+		- [Spring Boot](#spring-boot)
+	- [Building the application](#building-the-application)
+		- [Maven](#maven)
+		- [Bootstrapping with Spring Initializers](#bootstrapping-with-spring-initializers)
+		- [Making A Web App](#making-a-web-app)
+			- [Removing Security](#removing-security)
+			- [Building the Advice page](#building-the-advice-page)
+				- [Adding template](#adding-template)
+				- [Adding an advice controller](#adding-an-advice-controller)
+		- [Adding Sign Up functionality](#adding-sign-up-functionality)
+			- [Creating a User Entity](#creating-a-user-entity)
+			- [Creating a User Repository](#creating-a-user-repository)
+			- [Creating a Signup page](#creating-a-signup-page)
+			- [Add the template](#add-the-template)
+			- [Creating a controller](#creating-a-controller)
+		- [Securing Our Web App](#securing-our-web-app)
+			- [Uncomment Spring Security](#uncomment-spring-security)
+			- [Create a custom UserDetailsService](#create-a-custom-userdetailsservice)
+			- [Configure Spring Security](#configure-spring-security)
+	- [Things to try next](#things-to-try-next)
+	- [Final Thoughts](#final-thoughts)
+	- [Resources](#resources)
+	- [Thanks](#thanks)
+
+<!-- /TOC -->
+
 ## Goal
 
 For this project, we'll be creating a Spring app that lets us sign in, and get advice.
@@ -693,6 +727,6 @@ Spring boot feels to be extremely modular with components for everything. While 
   - [Spring Boot Quickstart](http://projects.spring.io/spring-boot/)
   - [Spring Boot Reference Documentation](http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle)
 
-## Thanks:
+## Thanks
 
 1. Eric for the [sign up and login form](http://codepen.io/ehermanson/pen/KwKWEv)
