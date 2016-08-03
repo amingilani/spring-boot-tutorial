@@ -1,39 +1,32 @@
 # Zero to Spring Boot in Seven Days
 
-This is the story of how I went from zero to Spring Boot in seven days, and how you can too. This entire article is based on my experience alone. Expect plenty
-of Node and Ruby references.
+This is the story of how I went from zero to Spring Boot in seven days, and how you can too. This entire article is based on my experience alone. Expect plenty of Node and Ruby references.
 
 ## Goal
 
 For this project, we'll be creating a Spring app that lets us sign in, and get advice.
 
+![Signing up](img/signup.gif)
+
 ### Prerequisites
 
 It is assumed that you:
 
-  - Can use Git
-  - Are comfortable with the command line
-  - Have prior programming experience
-
+- Can use Git
+- Are comfortable with the command line
+- Have prior programming experience
 
 ## Spring
 
-The Spring Framework is Platform that provides you the building blocks to
-a great Java app. This lets you focus on business logic without
-being bogged down by the other stuff.
+The Spring Framework is Platform that provides you the building blocks to a great Java app. This lets you focus on business logic without being bogged down by the other stuff.
 
-While the Java Platform is robust, as a developer your time is better spent
-implementing your own application, as opposed to creating an ORM for your
-database layer, or a web framework. This is where Spring makes your job easier.
+While the Java Platform is robust, as a developer your time is better spent implementing your own application, as opposed to creating an ORM for your database layer, or a web framework. This is where Spring makes your job easier.
 
-Spring provides Java objects which abstract away these low level
-tasks. These objects encapsulate best practices, and allow you to build a whole
-web application from "Plain Old Java Objects" (POJOs).
+Spring provides Java objects which abstract away these low level tasks. These objects encapsulate best practices, and allow you to build a whole web application from "Plain Old Java Objects" (POJOs).
 
 ### Dependency Injection
 
-The Spring Framework injects its modules automagically when required, during the
-build process. Focus on building your own application and not the
+The Spring Framework injects its modules automagically when required, during the build process. Focus on building your own application and not the
 
 ### Modules
 
@@ -41,30 +34,27 @@ build process. Focus on building your own application and not the
 
 Spring organizes its features in a set of about 20 modules, grouped into:
 
-1. **Core**  
+1. **Core**<br>
   fundamental spring modules.
-2. **AOP and Instrumentation**  
-  an AOP implementation to help you decouple code that doesn't belong in business logic itself.  
-  e.g. running `Log( User + " made a " + transaction.type);` every time a user makes a transaction from their bank account.  
-  This way we see `"John made a deposit"` when John makes a deposit.  
+2. **AOP and Instrumentation**<br>
+  an AOP implementation to help you decouple code that doesn't belong in business logic itself.<br>
+  e.g. running `Log( User + " made a " + transaction.type);` every time a user makes a transaction from their bank account.<br>
+  This way we see `"John made a deposit"` when John makes a deposit.<br>
   AOP would allow us to write this rule in an aspect, keeping the transaction related code clean.
-3. **Messaging**  
+3. **Messaging**<br>
   Support for integrating with messaging systems like AQMP and STOMP.
-4. **Data Access/Integration**  
+4. **Data Access/Integration**<br>
   This contains the `JDBC`, `ORM`, `OXM`, `JMS`, and `Transaction` modules.
-5. **Web**  
-   Modules related to web, including HTTP, MVC and Web Sockets.
-6. **Test**  
+5. **Web**<br>
+  Modules related to web, including HTTP, MVC and Web Sockets.
+6. **Test**<br>
   Unit and Integration testing frameworks
 
 ### Spring Boot
 
-Getting a Spring application running can be tedious and daunting. That's why
-Spring Boot "takes and opinionated view of building Spring applications and gets
-you up and running as fast as possible."
+Getting a Spring application running can be tedious and daunting. That's why Spring Boot "takes and opinionated view of building Spring applications and gets you up and running as fast as possible."
 
-The idea is that Spring Boot lets you bootstrap your project, and then gets out
-of your way as the project starts becoming more complex.
+The idea is that Spring Boot lets you bootstrap your project, and then gets out of your way as the project starts becoming more complex.
 
 Spring boot also uses a large amount of convention over configuration, so if you place your pieces correctly, everything just works.
 
@@ -72,35 +62,30 @@ Spring boot also uses a large amount of convention over configuration, so if you
 
 Let's break this down into subtasks:
 
-0. **Bootstrapping with Spring Initializer**  
+1. **Bootstrapping with Spring Initializer**<br>
   Precursors to the project
 
-1. **Making A Web App**  
+2. **Making A Web App**<br>
   A Spring MVC app that serves static content
 
-2. **Adding Sign Up functionality**  
+3. **Adding Sign Up functionality**<br>
   Creating Models for our User and saving them to a database on registration.
 
-3. **Securing The Web App**  
+4. **Securing The Web App**<br>
   Using Spring Security to enable authentication for the with an in-memory user
 
-4. **Switching Spring Security to Use The Database**  
+5. **Switching Spring Security to Use The Database**<br>
   Making Spring Security use our User Model for Authentication.
 
 We'll be using Maven for our build.
 
 ### Maven
 
-Maven is a build automation tool for Java projects. It defines project details,
-manages dependencies, and can execute builds. Loosely translated, it's
-like `package.json` and `grunt` for Java, all packaged into one, with build
-conventions baked in.
+Maven is a build automation tool for Java projects. It defines project details, manages dependencies, and can execute builds. Loosely translated, it's like `package.json` and `grunt` for Java, all packaged into one, with build conventions baked in.
 
 ### Bootstrapping with Spring Initializers
 
-To get started with a Spring Boot project, the quickest way is to use
-[Spring Initializer](https://start.spring.io) and select all the modules that
-you would require. For this project we'll need:
+To get started with a Spring Boot project, the quickest way is to use [Spring Initializer](https://start.spring.io) and select all the modules that you would require. For this project we'll need:
 
 1. Web
 2. Thymeleaf
@@ -110,11 +95,9 @@ you would require. For this project we'll need:
 
 We'll be using Maven for our build.
 
-TLDR: run:
-`curl start.spring.io/starter.zip -d dependencies=web,data-jpa,thymeleaf,h2,security -d javaVersion=1.8 -d applicationName=myapp -d artifactId=myapp -d packageName=myapp -d type=maven-project -d packaging=jar -o initial.zip`
+TLDR: run: `curl start.spring.io/starter.zip -d dependencies=web,data-jpa,thymeleaf,h2,security -d javaVersion=1.8 -d applicationName=myapp -d artifactId=myapp -d packageName=myapp -d type=maven-project -d packaging=jar -o initial.zip`
 
 Go ahead and explore the `pom.xml` file, this is the manifest for your project
-
 
 ### Making A Web App
 
@@ -122,8 +105,7 @@ We're going to make a web application with no security.
 
 #### Removing Security
 
-First, go ahead and temporarily comment the `spring-boot-starter-security` dependency, until we configure the `security` package later on. It defaults to restricting
-everything behind a `401 Unauthorized` error, which isn't needed at the moment.
+First, go ahead and temporarily comment the `spring-boot-starter-security` dependency, until we configure the `security` package later on. It defaults to restricting everything behind a `401 Unauthorized` error, which isn't needed at the moment.
 
 ```xml
 <!-- <dependency>
@@ -134,8 +116,7 @@ everything behind a `401 Unauthorized` error, which isn't needed at the moment.
 
 #### Building the Advice page
 
-The first and page we'll build is the simples, a page that displays advice to the visitor, this will later on be our
-password protected page
+The first and page we'll build is the simples, a page that displays advice to the visitor, this will later on be our password protected page
 
 ##### Adding template
 
@@ -164,7 +145,7 @@ password protected page
 
 The HTML above should be simple to understand. It displays a line of text that says 'Wait for it...' and a 'more button'
 
-```js
+```javascript
 var getAdvice = function() {
     $.getJSON('http://api.adviceslip.com/advice', function(data) {
         $("h2#advice").replaceWith('<h2 id="advice">' + data.slip.advice + '</h2>');
@@ -177,6 +158,7 @@ $('button.advice').on('click', function() {
     getAdvice();
 });
 ```
+
 This uses jQuery to fetch a JSON object from the api at adviceslips.com, and replaces the "Wait for it..." on the html. It also adds functionality to our button.
 
 ##### Adding an advice controller
@@ -192,8 +174,8 @@ public String showAdvice() {
 }
 
 }
-
 ```
+
 This controller maps on the Thymeleaf template onto `GET /advice`
 
 ### Adding Sign Up functionality
@@ -234,7 +216,6 @@ public class User {
     }
 
 }
-
 ```
 
 This is the entity that will be saved to our database, a User only has a `username` and `password`
@@ -251,7 +232,6 @@ User findByUserName(String UserName);
 This repository inherits from the `CrudRepository` in the `data` dependency, and loads users from their usernames
 
 #### Creating a Signup page
-
 
 #### Add the template
 
@@ -328,6 +308,7 @@ First add [normalize.css](github.com/necolas/normalize.css) to `main/resources/s
 
 </html>
 ```
+
 This adds a sign up and sign in page in one fell swoop.
 
 ```css
@@ -513,7 +494,7 @@ textarea {
 
 Standard styling.
 
-```js
+```javascript
 $('.form').find('input, textarea').on('keyup blur focus', function(e) {
 
     var $this = $(this),
@@ -556,8 +537,8 @@ $('.tab a').on('click', function(e) {
     $(target).fadeIn(600);
 
 });
-
 ```
+
 Standard Javascript.
 
 #### Creating a controller
@@ -675,6 +656,7 @@ public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception 
 }
 }
 ```
+
 Finally we configure with pages are public and which pages require a login.
 
 ## Things to try next
@@ -690,25 +672,26 @@ Or you could skip all this and try out [Auth0](https://auth0.com)
 
 ## Final Thoughts
 
-Spring boot feels to be extremely modular with components for everything. While
-this tutorial focused on building a monolithic MVC application, the pieces
-available allow opportunities ranging from a simple website, to complex micro
-services for a large system, aided by robust modules for your choice of
-messaging protocols.
+Spring boot feels to be extremely modular with components for everything. While this tutorial focused on building a monolithic MVC application, the pieces available allow opportunities ranging from a simple website, to complex micro services for a large system, aided by robust modules for your choice of messaging protocols.
 
 ## Resources
 
-  1. Learn Java
-    - [Codecademy](https://www.codecademy.com/learn/learn-java)
-    - [Learn X in Y Minutes](https://learnxinyminutes.com/docs/java/)
-  2. Learn about Maven
-    - [Maven in 5 Minutes](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html)
-    - [Getting Started with Maven](http://spring.io/guides/gs/maven/)
-  3. Spring:
-    - [Spring Framework Quickstart](https://projects.spring.io/spring-framework/)
-    - [Spring Framework Reference](http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/)
-    - [Spring Boot Quickstart](http://projects.spring.io/spring-boot/)
-    - [Spring Boot Reference Documentation](http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle)
+1. Learn Java
+
+  - [Codecademy](https://www.codecademy.com/learn/learn-java)
+  - [Learn X in Y Minutes](https://learnxinyminutes.com/docs/java/)
+
+2. Learn about Maven
+
+  - [Maven in 5 Minutes](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html)
+  - [Getting Started with Maven](http://spring.io/guides/gs/maven/)
+
+3. Spring:
+
+  - [Spring Framework Quickstart](https://projects.spring.io/spring-framework/)
+  - [Spring Framework Reference](http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/)
+  - [Spring Boot Quickstart](http://projects.spring.io/spring-boot/)
+  - [Spring Boot Reference Documentation](http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle)
 
 ## Thanks:
 
